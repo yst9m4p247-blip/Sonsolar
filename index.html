@@ -1,0 +1,103 @@
+<!-- -->
+<html><head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+	<title>&#8206;</title>
+	<link rel="apple-touch-icon-precomposed" href="http://abc.haoyunlai.xyz/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./style.css">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="apple-touch-icon" href="icon.png">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+	<link rel="manifest" href="manifest.json">
+	
+</head>
+        <body>
+<p><br><br></p>    
+<div class="zhengti">
+    <div class="juzuo1">V25083002(Son Nguyen)
+    <div class="saomatishi juzhong" id="biaoti">将二维码对准扫描器扫码进出场</div>
+    
+    <div class="yuan1 yuant"></div>
+    <div class="yuan2 yuant"></div>
+    
+    <div class="juzhong erweima zise">
+        <div class="juzuo2" id="dateTime00" style="font-weight: 600;"></div>
+        <div id="neirong">
+            <img class="ewm" src="./ewm.gif">         
+        </div>
+        
+        <div id="neirong1">    
+            <div>
+                <a class="juzhong footsty shuaxinerweima" style="margin-top: 2rem; font-size: 2.2rem" href="#">刷新二维码</a>
+            </div>
+        </div>
+
+        <div class="juzhong footsty yishengxiao word_breath">
+            <div id="trigger-success" style="cursor: pointer;">已生效</div>
+        </div>
+
+        <div class="juzhong footsty shijian">
+            <div id="dateTime3">00:00</div>
+        </div>
+    </div>
+
+    <div class="dierhang">
+        尊敬的员工您好，您已进入企业涉密区域，出于企业安全考虑，您的手机摄像头将被禁止拍摄，感谢您的配合。
+    </div>
+</div>
+
+<script>
+    // 1. Định dạng ngày giờ
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "y+": this.getFullYear(),
+            "M+": this.getMonth() + 1,
+            "d+": this.getDate(),
+            "h+": this.getHours(),
+            "m+": this.getMinutes(),
+            "s+": this.getSeconds(),
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+    // 2. Cập nhật ngày giờ hệ thống liên tục (Phía trên QR)
+    setInterval(function () {
+        const dt = document.getElementById('dateTime00');
+        if (dt) dt.innerHTML = (new Date()).format('yyyy-M-d hh:mm:ss');
+    }, 1000);
+
+    // 3. LOGIC RESET ĐỒNG HỒ KHI NHẤN 5 LẦN VÀO NÚT "LÀM MỚI"
+    let startTime = localStorage.getItem("startTime") || Date.now();
+    localStorage.setItem("startTime", startTime);
+
+    // Hiển thị đồng hồ đếm thời gian đã trôi qua
+    setInterval(function () {
+        let diff = Math.floor((Date.now() - startTime) / 1000);
+        let hrs = Math.floor(diff / 3600);
+        let mins = Math.floor((diff % 3600) / 60);
+        let secs = diff % 60;
+        let timeStr = (hrs > 0 ? hrs + ':' : '') + (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+        document.getElementById('dateTime3').innerHTML = timeStr;
+    }, 1000);
+
+    let reloadClicks = [];
+    document.querySelector('.shuaxinerweima').addEventListener('click', function (e) {
+        e.preventDefault();
+        const now = Date.now();
+        // Giới hạn trong 4 giây phải nhấn đủ 5 lần
+        reloadClicks = reloadClicks.filter(ts => now - ts < 4000);
+        reloadClicks.push(now);
+
+        // ĐÃ SỬA: Nhấn đủ 5 lần sẽ reset
+        if (reloadClicks.length >= 5) {
+            startTime = Date.now();
+            localStorage.setItem("startTime", startTime);
+            reloadClicks = [];
+        }
+    });
+</script>
+</body>
+</html>
