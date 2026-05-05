@@ -1,10 +1,26 @@
 html {
   font-size: 12px;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  background-color: #000000;
-  font-family: "Noto Sans", "Microsoft YaHei", "SimSun", "Tahoma", "Arial", sans-serif;
+  min-height: 100vh; /* QUAN TRỌNG: full màn hình điện thoại */
+  background-image: url("IMG_8622.jpeg");
+  background-size: cover;        /* phủ full */
+  background-position: center;   /* căn giữa */
+  background-repeat: no-repeat;  
+  background-attachment: fixed;
+}/*ữ nền không bị kéo */
+  
+  font-family: "Noto Sans";
+  overflow: hidden; /* nếu muốn không scroll */
+}
+}
+  font-family: "Noto Sans";
 }
 	{overflow:hidden;}
 a{text-decoration:none;}
@@ -16,16 +32,19 @@ a{text-decoration:none;}
 		.juzuo2{color:#000000;font-size: 3rem;padding:3rem 0 0}
 		.dierhang{color:#f4e4c0;font-size:2.8rem;Text-indent:2rem;padding: 2rem 0 3rem}
 		.saomatishi{background-color:#fcbd20;color:#ffffdd;margin: 1.2rem 0 0;padding:5rem 4rem;font-size:3rem;Border-radius:1rem}
-		.erweima{background-color:#fff;Border-radius:1rem; height: auto;}
-		.ewm{margin: 0.5rem 0 0 ;width: 500px;height: 500px}
-		.true{margin: 4rem 0 2rem ;width: 260px;height: 260px}
+		.erweima{background-color:#f2f2f2;Border-radius:1rem; height: auto;}
+		.ewm{margin: 0.5rem 0 0 ;width: 560px;height: 580px}
+		.true{margin: 4rem 0 2rem ;width: 200px;height: 200px}
 		.truetxt{color:#000000}
-		.truetxt p.jinchang{font-size:3.3em;margin:0}
+		.truetxt p.jinchang{font-size:3.3em;margin:0;   transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+
+}
 		.truetxt p.riqi{font-size:3em;margin:0 0 2rem}
 		.zise{color:#96b0a5}
 		.footsty{font-size: 2rem;padding:2rem}
 		.shuaxinerweima{color:#686868;font-size:2rem;padding:5rem 0 0}
-		.yishengxiao{color:#2bd56b;padding:5rem 2rem 0;font-size:3rem}
+		.yishengxiao{color:#2bd56b;padding:5rem 2rem 0;font-size:3.7rem}
 		.shijian{color:#1dc25a;padding:0 2rem 2rem ;font-size: 3rem}
 		.yuan1{float:left;margin:-1.5rem 0 0 -1.5rem}
 		.yuan2{float:right;margin:-1.5rem -1.5rem 0 0}
@@ -73,4 +92,3 @@ a{text-decoration:none;}
  
         
     }
-		
